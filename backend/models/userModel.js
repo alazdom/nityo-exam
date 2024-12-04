@@ -20,7 +20,7 @@ class UserModel {
     return { id: doc.id, ...doc.data() };
   }
 
-  static async updateUser(id, userData) {
+  static async updateUser(id, userData) {  //update user information
     await db.collection('users').doc(id).update(userData);
     return { id, ...userData };
   }

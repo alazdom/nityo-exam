@@ -1,84 +1,69 @@
+body, table, .employee-table {
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 .employee-table {
-    width: 80%;
-    margin: 30px auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-  }
-  
-  h2 {
-    text-align: left;
-    font-size: 1.6rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .search-box {
-    padding: 8px;
-    font-size: 1rem;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  table th, table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  table th {
-    background-color: #f8f8f8;
-  }
-  
-  .employee-photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .action-buttons button {
-    padding: 5px 10px;
-    font-size: 1.2rem;
-    margin-right: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .edit-btn {
-    background-color: #ff9800;
-    color: white;
-  }
-  
-  .delete-btn {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .edit-btn:hover {
-    background-color: #e68900;
-  }
-  
-  .delete-btn:hover {
-    background-color: #e31a1a;
-  }
+  margin: 30px auto;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+h2 {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  margin-top: 10px;
+}
+
+.employee-text {
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 100;
+  color: #000;
+}
+
+.records-text {
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 100;
+  color: #2f7abc;
+}
+
+.table-container {
+ border: 1px solid #ddd;
+ padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
 .add-employee-btn {
   padding: 10px 20px;
   background-color: #2f7abc;
   color: white;
+  font-size: 1.1rem;
   border: none;
   border-radius: 5px;
-  font-size: 1.1rem;
   cursor: pointer;
   margin: 20px 0;
 }
@@ -87,4 +72,141 @@
   background-color: #2f7abc;
 }
 
-  
+
+/* Search and Pagination */
+.search-pagination-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-container, .entries-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-label, .entries-label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-box, .entries-dropdown {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.search-box {
+  width: 13rem;
+}
+
+/* Table */
+table {
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f8f8f8;
+}
+
+.employee-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Buttons */
+/* button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+} */
+
+button {
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 10px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.action-buttons button svg {
+  width: 20px;  
+  height: 20px; 
+  margin: 0;    
+}
+
+.action-buttons button {
+  margin-right: 10px; 
+}
+
+.action-buttons button:last-child {
+  margin-right: 0; 
+}
+
+.edit-btn, .delete-btn {
+  color: white;
+}
+
+.edit-btn {
+  background-color: #ff9800;
+}
+
+.edit-btn:hover {
+  background-color: #e68900;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #e31a1a;
+}
+
+.add-employee-btn {
+  padding: 10px 20px;
+  background-color: #2f7abc;
+  color: white;
+  font-size: 1.1rem;
+  margin: 20px 0;
+}
+
+.add-employee-btn:hover {
+  background-color: #2f7abc;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.pagination-btn.active, .pagination-btn:hover {
+  background-color: #2f7abc;
+  color: white;
+  border-color: #2f7abc;
+}
