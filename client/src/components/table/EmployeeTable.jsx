@@ -293,7 +293,7 @@ const EmployeeTable = () => {
                     <td>
                       <img
                         src={employee.photo}
-                        alt="Profile"
+                        alt=""
                         className="employee-photo"
                       />
                     </td>
