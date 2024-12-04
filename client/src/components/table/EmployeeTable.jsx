@@ -13,7 +13,14 @@ const EmployeeTable = () => {
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage, setEmployeesPerPage] = useState(5);
+  const [employeesPerPage, setEmployeesPerPage] = useState(10);
+  const [sorting, setSorting] = useState({
+    name: "",
+    username: "",
+    country: "",
+    email: "",
+    accountType: "",
+  });
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -74,6 +81,45 @@ const EmployeeTable = () => {
     indexOfLastEmployee
   );
 
+  const sortEmployees = (employees, sorting) => {
+    const sortedEmployees = [...employees];
+    Object.keys(sorting).forEach((key) => {
+      if (sorting[key] !== "") {
+        sortedEmployees.sort((a, b) => {
+          if (key === "name") {
+            const fullNameA = a.firstName + " " + a.lastName;
+            const fullNameB = b.firstName + " " + b.lastName;
+            return sorting[key] === "asc"
+              ? fullNameA.localeCompare(fullNameB)
+              : fullNameB.localeCompare(fullNameA);
+          } else {
+            if (a[key] < b[key]) {
+              return sorting[key] === "asc" ? -1 : 1;
+            }
+            if (a[key] > b[key]) {
+              return sorting[key] === "asc" ? 1 : -1;
+            }
+            return 0;
+          }
+        });
+      }
+    });
+    return sortedEmployees;
+  };
+
+  const requestSort = (column) => {
+    let direction = "asc";
+    if (sorting[column] === "asc") {
+      direction = "desc";
+    } else if (sorting[column] === "desc") {
+      direction = ""; // Reset to default if already descending
+    }
+    setSorting((prevSorting) => ({
+      ...prevSorting,
+      [column]: direction,
+    }));
+  };
+
   return (
     <div>
       {!showForm ? (
@@ -111,16 +157,13 @@ const EmployeeTable = () => {
                     setCurrentPage(1); // Reset to the first page on entries change
                   }}
                 >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                  <option value={7}>7</option>
-                  <option value={8}>8</option>
-                  <option value={9}>9</option>
-                  <option value={10}>10</option>
+                  {Array.from({ length: 10 }, (_, index) => index + 1).map(
+                    (value) => (
+                      <option key={value} value={value}>
+                        {value}
+                      </option>
+                    )
+                  )}
                 </select>
                 <label className="entries-label">entries</label>
               </div>
@@ -130,16 +173,122 @@ const EmployeeTable = () => {
               <thead>
                 <tr>
                   <th>PHOTO</th>
-                  <th>NAME</th>
-                  <th>USERNAME</th>
-                  <th>COUNTRY</th>
-                  <th>EMAIL</th>
-                  <th>ACCOUNT TYPE</th>
+                  <th
+                    onClick={() => requestSort("name")}
+                    className={sorting.name ? sorting.name : ""}
+                  >
+                    NAME
+                    <span className="sort-arrows">
+                      <span
+                        className={`sort-arrow asc ${
+                          sorting.name === "asc" ? "active" : ""
+                        }`}
+                      >
+                        ▲
+                      </span>
+                      <span
+                        className={`sort-arrow desc ${
+                          sorting.name === "desc" ? "active" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    onClick={() => requestSort("username")}
+                    className={sorting.username ? sorting.username : ""}
+                  >
+                    USERNAME
+                    <span className="sort-arrows">
+                      <span
+                        className={`sort-arrow asc ${
+                          sorting.username === "asc" ? "active" : ""
+                        }`}
+                      >
+                        ▲
+                      </span>
+                      <span
+                        className={`sort-arrow desc ${
+                          sorting.username === "desc" ? "active" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    onClick={() => requestSort("country")}
+                    className={sorting.country ? sorting.country : ""}
+                  >
+                    COUNTRY
+                    <span className="sort-arrows">
+                      <span
+                        className={`sort-arrow asc ${
+                          sorting.country === "asc" ? "active" : ""
+                        }`}
+                      >
+                        ▲
+                      </span>
+                      <span
+                        className={`sort-arrow desc ${
+                          sorting.country === "desc" ? "active" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    onClick={() => requestSort("email")}
+                    className={sorting.email ? sorting.email : ""}
+                  >
+                    EMAIL
+                    <span className="sort-arrows">
+                      <span
+                        className={`sort-arrow asc ${
+                          sorting.email === "asc" ? "active" : ""
+                        }`}
+                      >
+                        ▲
+                      </span>
+                      <span
+                        className={`sort-arrow desc ${
+                          sorting.email === "desc" ? "active" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    onClick={() => requestSort("accountType")}
+                    className={sorting.accountType ? sorting.accountType : ""}
+                  >
+                    ACCOUNT TYPE
+                    <span className="sort-arrows">
+                      <span
+                        className={`sort-arrow asc ${
+                          sorting.accountType === "asc" ? "active" : ""
+                        }`}
+                      >
+                        ▲
+                      </span>
+                      <span
+                        className={`sort-arrow desc ${
+                          sorting.accountType === "desc" ? "active" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    </span>
+                  </th>
+
                   <th>ACTION</th>
                 </tr>
               </thead>
               <tbody>
-                {currentEmployees.map((employee) => (
+                {sortEmployees(currentEmployees, sorting).map((employee) => (
                   <tr key={employee.id}>
                     <td>
                       <img

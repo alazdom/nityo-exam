@@ -57,6 +57,45 @@ h2::after {
   margin-bottom: 20px;
 }
 
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: #f8f8f8;
+  position: relative;
+  padding-right: 35px;
+}
+
+th:hover {
+  background-color: #f0f0f0;
+}
+
+.sort-arrows {
+  display: inline-flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;  
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sort-arrow {
+  font-size: 0.8rem;
+  color: #888; 
+  transition: color 0.3s ease;
+  margin-left: 2px; 
+  visibility: visible; 
+}
+
+.sort-arrow.active {
+  color: #2f7abc; 
+}
+
+th:hover .sort-arrow {
+  color: #555;  
+}
+
 .add-employee-btn {
   padding: 10px 20px;
   background-color: #2f7abc;
@@ -115,6 +154,7 @@ table th, table td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;;
 }
 
 table th {
@@ -126,13 +166,6 @@ table th {
   height: 50px;
   border-radius: 50%;
 }
-
-/* Buttons */
-/* button {
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-} */
 
 button {
   display: inline-flex; 
