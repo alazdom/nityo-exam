@@ -1,4 +1,3 @@
-// src/components/AddAccountForm.jsx
 import React, { useState } from 'react';
 import './AddAccountForm.css';
 import axios from 'axios';
@@ -41,13 +40,16 @@ const AddAccountForm = ({ setShowForm }) => {
 
   return (
     <div className="add-account-form">
-      <h2>Account: Add Record</h2>
+      <h2>
+            <span className="account-text">Account:</span>{" "}
+            <span className="add-text">Add Record</span>
+          </h2>
       <button className="back-btn" onClick={handleBackClick}>
         Back
       </button>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="country">Country *</label>
+          <label htmlFor="country">Country <span>*</span></label>
           <select
             name="country"
             id="country"
@@ -60,7 +62,7 @@ const AddAccountForm = ({ setShowForm }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="accountType">Account Type *</label>
+        <label htmlFor="accountType">Account Type <span>*</span></label>
           <select
             name="accountType"
             id="accountType"
@@ -74,7 +76,7 @@ const AddAccountForm = ({ setShowForm }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username *</label>
+          <label htmlFor="username">Username <span>*</span></label>
           <input
             type="text"
             id="username"
@@ -85,7 +87,7 @@ const AddAccountForm = ({ setShowForm }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name *</label>
+          <label htmlFor="lastName">Last Name <span>*</span></label>
           <input
             type="text"
             id="lastName"
@@ -96,7 +98,7 @@ const AddAccountForm = ({ setShowForm }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name *</label>
+          <label htmlFor="firstName">First Name <span>*</span></label>
           <input
             type="text"
             id="firstName"
@@ -107,7 +109,7 @@ const AddAccountForm = ({ setShowForm }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email Address *</label>
+          <label htmlFor="email">Email Address <span>*</span></label>
           <input
             type="email"
             id="email"
